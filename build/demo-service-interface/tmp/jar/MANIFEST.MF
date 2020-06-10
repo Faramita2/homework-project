@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: demo-service-interface
-Implementation-Version: 1.0.0
-Created-By: 14.0.1 (Oracle Corporation)
-Built-With: gradle 6.5
-Build-Time: 2020-06-10T06:12:18.595616800Z
-

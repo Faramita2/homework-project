@@ -26,7 +26,6 @@ subprojects {
 
 def coreNGVersion = '7.4.1'
 def hsqlVersion = '2.5.0'
-def jacksonVersion = '2.10.4'
 def mysqlVersion = '8.0.20'
 
 configure(subprojects.findAll { it.name.endsWith('-db-migration') }) {
