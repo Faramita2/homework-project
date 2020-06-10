@@ -8,6 +8,7 @@ import core.framework.module.App;
 public class DemoApp extends App {
     @Override
     protected void initialize() {
+        load(new BrushModule());
         load(new PainterModule());
     }
 }

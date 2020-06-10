@@ -1,3 +1,2 @@
-include 'demo-service-interface',
-        'demo-service',
-        'demo'
+include 'demo-service',
+        'first-service'
