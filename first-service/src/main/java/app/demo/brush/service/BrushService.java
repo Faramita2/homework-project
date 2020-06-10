@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BrushService {
     private final Logger logger = LoggerFactory.getLogger(BrushService.class);
+
     public void print() {
         logger.info("Hello World");
     }
