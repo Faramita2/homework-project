@@ -36,11 +36,21 @@ public class CatService {
         return view(cat);
     }
 
+    public CatView update(Long id) {
+        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+        cat.updatedTime = LocalDateTime.now();
+        cat.gender = CatGender.FEMALE;
+        catRepository.partialUpdate(cat);
+
+        return view(cat);
+    }
+
     private CatView view(Cat cat) {
         CatView result = new CatView();
         result.id = cat.id;
         result.name = cat.name;
         result.age = cat.age;
+        result.gender = cat.gender;
         result.createdTime = cat.createdTime;
         result.updatedTime = cat.updatedTime;
         result.createdBy = cat.createdBy;

@@ -23,5 +23,9 @@ public class CatModule extends Module {
 
         CatView cat = catService.get(catId);
         logger.warn("cat name: " + cat.name);
+
+        logger.warn("cat gender: " + cat.gender);
+        CatView newCat = catService.update(catId);
+        logger.warn("new cat gender: " + newCat.gender);
     }
 }
