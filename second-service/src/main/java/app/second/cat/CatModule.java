@@ -16,8 +16,12 @@ public class CatModule extends Module {
     @Override
     protected void initialize() {
         db().repository(Cat.class);
-        CatService cat = bind(CatService.class);
-        CatView view = cat.create();
-        logger.warn("cat id: " + view.id);
+        CatService catService = bind(CatService.class);
+        CatView view = catService.create();
+        Long catId = view.id;
+        logger.warn("cat id: " + catId);
+
+        CatView cat = catService.get(catId);
+        logger.warn("cat name: " + cat.name);
     }
 }

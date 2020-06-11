@@ -5,6 +5,7 @@ import app.second.cat.domain.CatGender;
 import app.second.cat.domain.CatView;
 import core.framework.db.Repository;
 import core.framework.inject.Inject;
+import core.framework.web.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +26,12 @@ public class CatService {
         cat.createdTime = LocalDateTime.now();
         cat.updatedTime = LocalDateTime.now();
         cat.id = catRepository.insert(cat).orElseThrow();
+
+        return view(cat);
+    }
+
+    public CatView get(Long id) {
+        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
 
         return view(cat);
     }
