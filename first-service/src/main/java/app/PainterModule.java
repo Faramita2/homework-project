@@ -1,6 +1,6 @@
 package app;
 
-import app.demo.painter.service.PainterService;
+import app.first.painter.service.PainterService;
 import core.framework.module.Module;
 
 /**

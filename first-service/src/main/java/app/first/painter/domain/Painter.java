@@ -1,4 +1,4 @@
-package app.demo.painter.domain;
+package app.first.painter.domain;
 
 /**
  * @author zoo

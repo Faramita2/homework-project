@@ -1,4 +1,4 @@
-package app.demo.brush.service;
+package app.first.brush.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

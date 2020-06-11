@@ -1,6 +1,6 @@
 package app;
 
-import app.demo.brush.service.BrushService;
+import app.first.brush.service.BrushService;
 import core.framework.module.Module;
 
 /**

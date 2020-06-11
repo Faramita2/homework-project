@@ -1,4 +1,4 @@
-package app.demo.brush.domain;
+package app.first.brush.domain;
 
 /**
  * @author zoo

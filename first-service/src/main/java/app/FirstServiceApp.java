@@ -5,7 +5,7 @@ import core.framework.module.App;
 /**
  * @author zoo
  */
-public class DemoApp extends App {
+public class FirstServiceApp extends App {
     @Override
     protected void initialize() {
         load(new BrushModule());

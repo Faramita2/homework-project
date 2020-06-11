@@ -1,7 +1,7 @@
-package app.demo.painter.service;
+package app.first.painter.service;
 
 
-import app.demo.brush.service.BrushService;
+import app.first.brush.service.BrushService;
 import core.framework.inject.Inject;
 
 
