@@ -45,6 +45,11 @@ public class CatService {
         return view(cat);
     }
 
+    public void delete(Long id) {
+        catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+        catRepository.delete(id);
+    }
+
     private CatView view(Cat cat) {
         CatView result = new CatView();
         result.id = cat.id;
