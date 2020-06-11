@@ -1,2 +1,4 @@
 include 'demo-service',
-        'first-service'
+        'first-service',
+        'second-service',
+        'second-service-db-migration'

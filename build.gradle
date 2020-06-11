@@ -79,6 +79,15 @@ configure([project(':first-service')]) {
     }
 }
 
+configure([project(':second-service')]) {
+    apply from: file("${rootDir}/gradle/app.gradle")
+    dependencies {
+        implementation "core.framework:core-ng:${coreNGVersion}"
+        runtimeOnly  "mysql:mysql-connector-java:${mysqlVersion}"
+        testImplementation "core.framework:core-ng-test:${coreNGVersion}"
+    }
+}
+
 project(':demo-service') {
 }
 
