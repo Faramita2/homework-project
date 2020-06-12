@@ -67,4 +67,9 @@ public class CustomerService {
 
         return view(customer);
     }
+
+    public void delete(Long id) {
+        customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        customerRepository.delete(id);
+    }
 }

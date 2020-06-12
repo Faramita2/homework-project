@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerWebService {
 
     @Override
     public void delete(Long id) {
-
+        customerService.delete(id);
     }
 
     @Override
