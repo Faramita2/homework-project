@@ -45,6 +45,23 @@ public class CatService {
         return view(cat);
     }
 
+    public CatView update(Long id) {
+        catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+
+        Cat newCat = new Cat();
+        newCat.id = id;
+        newCat.name = "han";
+        newCat.gender = CatGender.MALE;
+        newCat.age = 1;
+        newCat.createdBy = "CatService";
+        newCat.updatedBy = "CatService";
+        newCat.createdTime = LocalDateTime.now();
+        newCat.updatedTime = LocalDateTime.now();
+        catRepository.update(newCat);
+
+        return view(newCat);
+    }
+
     public void delete(Long id) {
         catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
         catRepository.delete(id);

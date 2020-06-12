@@ -33,6 +33,10 @@ public class CatModule extends Module {
         CatView newCat = catService.partialUpdate(catId);
         logger.warn("new cat gender: " + newCat.gender);
 
+        logger.warn("====================update action====================");
+        CatView newCat2 = catService.update(catId);
+        logger.warn("new cat2 name: " + newCat2.name);
+
         logger.warn("====================delete action====================");
         catService.delete(catId);
         try {
