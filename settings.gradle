@@ -5,4 +5,6 @@ include 'demo-service',
         'second-service-mongo-migration',
         'customer-service',
         'customer-service-db-migration',
-        'customer-service-interface'
+        'customer-service-interface',
+        'customer-site',
+        'customer-site-interface'
