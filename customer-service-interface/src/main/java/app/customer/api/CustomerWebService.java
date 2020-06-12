@@ -29,7 +29,7 @@ public interface CustomerWebService {
 
     @PUT
     @Path("/customer/:id")
-    CustomerView update(UpdateCustomerRequest request);
+    CustomerView update(@PathParam("id") Long id, UpdateCustomerRequest request);
 
     @DELETE
     @Path("/customer/:id")
