@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author zoo
  */
-public class SearchCustomerResponse {
+public class BOSearchCustomerResponse {
     @NotNull
     @Property(name = "total")
     public Long total;

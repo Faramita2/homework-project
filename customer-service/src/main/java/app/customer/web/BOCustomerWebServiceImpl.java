@@ -1,18 +1,18 @@
 package app.customer.web;
 
-import app.customer.api.CustomerWebService;
-import app.customer.api.customer.CreateCustomerRequest;
+import app.customer.api.BOCustomerWebService;
+import app.customer.api.customer.BOCreateCustomerRequest;
 import app.customer.api.customer.CustomerView;
-import app.customer.api.customer.SearchCustomerRequest;
-import app.customer.api.customer.SearchCustomerResponse;
-import app.customer.api.customer.UpdateCustomerRequest;
+import app.customer.api.customer.BOSearchCustomerRequest;
+import app.customer.api.customer.BOSearchCustomerResponse;
+import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.service.CustomerService;
 import core.framework.inject.Inject;
 
 /**
  * @author zoo
  */
-public class CustomerServiceImpl implements CustomerWebService {
+public class BOCustomerWebServiceImpl implements BOCustomerWebService {
     @Inject
     CustomerService customerService;
 
@@ -22,12 +22,12 @@ public class CustomerServiceImpl implements CustomerWebService {
     }
 
     @Override
-    public CustomerView create(CreateCustomerRequest request) {
+    public CustomerView create(BOCreateCustomerRequest request) {
         return customerService.create(request);
     }
 
     @Override
-    public CustomerView update(Long id, UpdateCustomerRequest request) {
+    public CustomerView update(Long id, BOUpdateCustomerRequest request) {
         return customerService.update(id, request);
     }
 
@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerWebService {
     }
 
     @Override
-    public SearchCustomerResponse search(SearchCustomerRequest request) {
+    public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
         return null;
     }
 }

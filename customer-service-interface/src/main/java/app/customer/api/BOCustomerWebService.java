@@ -1,10 +1,10 @@
 package app.customer.api;
 
-import app.customer.api.customer.CreateCustomerRequest;
+import app.customer.api.customer.BOCreateCustomerRequest;
 import app.customer.api.customer.CustomerView;
-import app.customer.api.customer.SearchCustomerRequest;
-import app.customer.api.customer.SearchCustomerResponse;
-import app.customer.api.customer.UpdateCustomerRequest;
+import app.customer.api.customer.BOSearchCustomerRequest;
+import app.customer.api.customer.BOSearchCustomerResponse;
+import app.customer.api.customer.BOUpdateCustomerRequest;
 import core.framework.api.http.HTTPStatus;
 import core.framework.api.web.service.DELETE;
 import core.framework.api.web.service.GET;
@@ -17,26 +17,26 @@ import core.framework.api.web.service.ResponseStatus;
 /**
  * @author zoo
  */
-public interface CustomerWebService {
+public interface BOCustomerWebService {
     @GET
-    @Path("/customer/:id")
+    @Path("/bo/customer/:id")
     CustomerView get(@PathParam("id") Long id);
 
     @POST
-    @Path("/customer")
+    @Path("/bo/customer")
     @ResponseStatus(HTTPStatus.CREATED)
-    CustomerView create(CreateCustomerRequest request);
+    CustomerView create(BOCreateCustomerRequest request);
 
     @PUT
-    @Path("/customer/:id")
-    CustomerView update(@PathParam("id") Long id, UpdateCustomerRequest request);
+    @Path("/bo/customer/:id")
+    CustomerView update(@PathParam("id") Long id, BOUpdateCustomerRequest request);
 
     @DELETE
-    @Path("/customer/:id")
+    @Path("/bo/customer/:id")
     @ResponseStatus(HTTPStatus.NO_CONTENT)
     void delete(@PathParam("id") Long id);
 
     @GET
-    @Path("/customer")
-    SearchCustomerResponse search(SearchCustomerRequest request);
+    @Path("/bo/customer")
+    BOSearchCustomerResponse search(BOSearchCustomerRequest request);
 }

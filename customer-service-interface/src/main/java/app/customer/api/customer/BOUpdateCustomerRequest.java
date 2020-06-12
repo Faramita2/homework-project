@@ -7,7 +7,7 @@ import core.framework.api.validate.NotNull;
 /**
  * @author zoo
  */
-public class CreateCustomerRequest {
+public class BOUpdateCustomerRequest {
     @NotNull
     @NotBlank
     @Property(name = "name")
@@ -15,5 +15,5 @@ public class CreateCustomerRequest {
 
     @NotNull
     @Property(name = "gender")
-    public CustomerGender gender;
+    public CustomerGenderView gender;
 }

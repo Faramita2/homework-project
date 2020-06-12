@@ -20,5 +20,5 @@ public class CustomerView {
 
     @NotNull
     @Property(name = "gender")
-    public CustomerGender gender;
+    public CustomerGenderView gender;
 }

@@ -6,7 +6,7 @@ import core.framework.api.web.service.QueryParam;
 /**
  * @author zoo
  */
-public class SearchCustomerRequest {
+public class BOSearchCustomerRequest {
     @NotNull
     @QueryParam(name = "skip")
     public Integer skip = 0;

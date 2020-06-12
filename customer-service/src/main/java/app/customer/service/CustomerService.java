@@ -1,7 +1,8 @@
 package app.customer.service;
 
-import app.customer.api.customer.CreateCustomerRequest;
-import app.customer.api.customer.UpdateCustomerRequest;
+import app.customer.api.customer.BOCreateCustomerRequest;
+import app.customer.api.customer.CustomerGenderView;
+import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.domain.CustomerGender;
 import app.customer.api.customer.CustomerView;
 import app.customer.domain.Customer;
@@ -26,7 +27,7 @@ public class CustomerService {
         return view(customer);
     }
 
-    public CustomerView create(CreateCustomerRequest request) {
+    public CustomerView create(BOCreateCustomerRequest request) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
         if (existingCustomer.isPresent()) {
             throw new ConflictException("customer already exists, name = " + request.name);
@@ -49,11 +50,11 @@ public class CustomerService {
         CustomerView result = new CustomerView();
         result.id = customer.id;
         result.name = customer.name;
-        result.gender = app.customer.api.customer.CustomerGender.valueOf(customer.gender.name());
+        result.gender = CustomerGenderView.valueOf(customer.gender.name());
         return result;
     }
 
-    public CustomerView update(Long id, UpdateCustomerRequest request) {
+    public CustomerView update(Long id, BOUpdateCustomerRequest request) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
         if (existingCustomer.isPresent()) {
