@@ -1,4 +1,4 @@
-package app.second.cat;
+package app.second;
 
 import app.second.cat.domain.Cat;
 import app.second.cat.domain.CatView;
