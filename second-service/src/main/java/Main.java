@@ -1,4 +1,4 @@
-import app.second.cat.SecondServiceApp;
+import app.second.SecondServiceApp;
 
 /**
  * @author zoo
