@@ -2,4 +2,7 @@ include 'demo-service',
         'first-service',
         'second-service',
         'second-service-db-migration',
-        'second-service-mongo-migration'
+        'second-service-mongo-migration',
+        'customer-service',
+        'customer-service-db-migration',
+        'customer-service-interface'
