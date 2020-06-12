@@ -6,8 +6,8 @@ import core.framework.db.DBEnumValue;
  * @author zoo
  */
 public enum CustomerGender {
-    @DBEnumValue(value = "MALE")
+    @DBEnumValue("MALE")
     MALE,
-    @DBEnumValue(value = "FEMALE")
+    @DBEnumValue("FEMALE")
     FEMALE
 }
