@@ -24,5 +24,9 @@ public class DogModule extends Module {
         DogService dogService = bind(DogService.class);
         DogView dog = dogService.create();
         logger.warn("dog name: " + dog.name);
+
+        String dogId = dog.id;
+        DogView getDog = dogService.get(dogId);
+        logger.warn("get dog name: " + getDog.name);
     }
 }

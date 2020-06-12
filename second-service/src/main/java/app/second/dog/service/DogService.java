@@ -5,6 +5,7 @@ import app.second.dog.domain.DogGender;
 import app.second.dog.domain.DogView;
 import core.framework.inject.Inject;
 import core.framework.mongo.MongoCollection;
+import core.framework.web.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -25,6 +26,12 @@ public class DogService {
         dog.gender = DogGender.MALE;
         dog.id = UUID.randomUUID().toString();
         dogCollection.insert(dog);
+
+        return view(dog);
+    }
+
+    public DogView get(String id) {
+        Dog dog = dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
 
         return view(dog);
     }
