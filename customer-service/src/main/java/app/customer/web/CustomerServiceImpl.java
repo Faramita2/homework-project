@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerWebService {
 
     @Override
     public CustomerView update(Long id, UpdateCustomerRequest request) {
-        return null;
+        return customerService.update(id, request);
     }
 
     @Override

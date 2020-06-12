@@ -1,6 +1,7 @@
 package app.customer.service;
 
 import app.customer.api.customer.CreateCustomerRequest;
+import app.customer.api.customer.UpdateCustomerRequest;
 import app.customer.domain.CustomerGender;
 import app.customer.api.customer.CustomerView;
 import app.customer.domain.Customer;
@@ -50,5 +51,20 @@ public class CustomerService {
         result.name = customer.name;
         result.gender = app.customer.api.customer.CustomerGender.valueOf(customer.gender.name());
         return result;
+    }
+
+    public CustomerView update(Long id, UpdateCustomerRequest request) {
+        Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
+        if (existingCustomer.isPresent()) {
+            throw new ConflictException("customer already exists, name = " + request.name);
+        }
+        customer.name = request.name;
+        customer.gender = CustomerGender.valueOf(request.gender.name());
+        customer.updatedTime = LocalDateTime.now();
+        customer.updatedBy = "CustomerService";
+        customerRepository.update(customer);
+
+        return view(customer);
     }
 }
