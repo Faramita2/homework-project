@@ -25,14 +25,6 @@ public class CustomerService {
         return view(customer);
     }
 
-    private CustomerView view(Customer customer) {
-        CustomerView result = new CustomerView();
-        result.id = customer.id;
-        result.name = customer.name;
-        result.gender = app.customer.api.customer.CustomerGender.valueOf(customer.gender.name());
-        return result;
-    }
-
     public CustomerView create(CreateCustomerRequest request) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
         if (existingCustomer.isPresent()) {
@@ -50,5 +42,13 @@ public class CustomerService {
         customer.id = customerRepository.insert(customer).orElseThrow();
 
         return view(customer);
+    }
+
+    private CustomerView view(Customer customer) {
+        CustomerView result = new CustomerView();
+        result.id = customer.id;
+        result.name = customer.name;
+        result.gender = app.customer.api.customer.CustomerGender.valueOf(customer.gender.name());
+        return result;
     }
 }

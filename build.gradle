@@ -27,6 +27,8 @@ subprojects {
 def coreNGVersion = '7.4.1'
 def mysqlVersion = '8.0.20'
 def mongoVersion = '7.4.1'
+def hsqlVersion = '2.5.0'
+
 
 configure(subprojects.findAll { it.name.endsWith('-db-migration') }) {
     apply from: file("${rootDir}/gradle/db-migration.gradle")
@@ -87,6 +89,15 @@ configure([project(':second-service')]) {
         implementation  "core.framework:core-ng-mongo:${mongoVersion}"
         runtimeOnly  "mysql:mysql-connector-java:${mysqlVersion}"
         testImplementation "core.framework:core-ng-test:${coreNGVersion}"
+    }
+}
+
+project(':customer-service') {
+    dependencies {
+        implementation "core.framework:core-ng:${coreNGVersion}"
+        implementation project(':customer-service-interface')
+        runtimeOnly "mysql:mysql-connector-java:${mysqlVersion}"
+        testRuntimeOnly "org.hsqldb:hsqldb:${hsqlVersion}"
     }
 }
 
