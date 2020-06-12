@@ -38,15 +38,29 @@ public class DogService {
         return view(dog);
     }
 
-    public void partialUpdate(String id) {
+    public void update(String id) {
         dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
-        dogCollection.update(Filters.eq("_id", id), Updates.set("name", "moneymoney"));
+        dogCollection.update(Filters.eq("_id", id), Updates.combine(
+            Updates.set("name", "moneymoney"), Updates.set("gender", DogGender.MALE)));
+    }
+
+    public void replace(String id) {
+        dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
+        Dog newDog = new Dog();
+        newDog.id = id;
+        newDog.name = "gold";
+        newDog.gender = DogGender.FEMALE;
+        newDog.age = 2;
+        newDog.createdTime = LocalDateTime.now();
+        newDog.updatedTime = LocalDateTime.now();
+        dogCollection.replace(newDog);
     }
 
     private DogView view(Dog dog) {
         DogView result = new DogView();
         result.id = dog.id;
         result.name = dog.name;
+        result.gender = dog.gender;
 
         return result;
     }

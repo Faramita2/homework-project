@@ -17,4 +17,8 @@ public class DogView {
     @NotBlank
     @Property(name = "name")
     public String name;
+
+    @NotNull
+    @Property(name = "gender")
+    public DogGender gender;
 }
