@@ -11,7 +11,7 @@ public class SecondServiceApp extends App {
     protected void initialize() {
         load(new SystemModule("sys.properties"));
         loadProperties("app.properties");
-//        load(new CatModule());
-        load(new DogModule());
+        load(new CatModule());
+//        load(new DogModule());
     }
 }

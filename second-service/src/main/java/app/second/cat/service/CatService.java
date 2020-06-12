@@ -36,7 +36,7 @@ public class CatService {
         return view(cat);
     }
 
-    public CatView update(Long id) {
+    public CatView partialUpdate(Long id) {
         Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
         cat.updatedTime = LocalDateTime.now();
         cat.gender = CatGender.FEMALE;
