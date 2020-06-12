@@ -19,7 +19,7 @@ public class DogModule extends Module {
     protected void initialize() {
         MongoConfig config = config(MongoConfig.class);
         String url = "app.mongo.url";
-        config.uri(property(url).orElseThrow(() ->new NotFoundException("not found property: " + url)));
+        config.uri(property(url).orElseThrow(() -> new NotFoundException("not found property: " + url)));
         config.collection(Dog.class);
         DogService dogService = bind(DogService.class);
 

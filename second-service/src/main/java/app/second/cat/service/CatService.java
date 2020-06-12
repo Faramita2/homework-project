@@ -3,7 +3,9 @@ package app.second.cat.service;
 import app.second.cat.domain.Cat;
 import app.second.cat.domain.CatGender;
 import app.second.cat.domain.CatView;
+import core.framework.db.Database;
 import core.framework.db.Repository;
+import core.framework.db.Transaction;
 import core.framework.inject.Inject;
 import core.framework.web.exception.NotFoundException;
 
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 public class CatService {
     @Inject
     Repository<Cat> catRepository;
+    @Inject
+    Database catDatabase;
 
     public CatView create() {
         Cat cat = new Cat();
@@ -28,6 +32,12 @@ public class CatService {
         cat.id = catRepository.insert(cat).orElseThrow();
 
         return view(cat);
+    }
+
+    public CatView createWithException() throws Exception {
+        create();
+
+        throw new Exception("exception for transaction");
     }
 
     public CatView get(Long id) {
@@ -65,6 +75,10 @@ public class CatService {
     public void delete(Long id) {
         catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
         catRepository.delete(id);
+    }
+
+    public Transaction startTrans() {
+        return catDatabase.beginTransaction();
     }
 
     private CatView view(Cat cat) {
