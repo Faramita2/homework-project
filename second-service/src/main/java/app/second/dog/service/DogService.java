@@ -3,6 +3,8 @@ package app.second.dog.service;
 import app.second.dog.domain.Dog;
 import app.second.dog.domain.DogGender;
 import app.second.dog.domain.DogView;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import core.framework.inject.Inject;
 import core.framework.mongo.MongoCollection;
 import core.framework.web.exception.NotFoundException;
@@ -34,6 +36,11 @@ public class DogService {
         Dog dog = dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
 
         return view(dog);
+    }
+
+    public void partialUpdate(String id) {
+        dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
+        dogCollection.update(Filters.eq("_id", id), Updates.set("name", "moneymoney"));
     }
 
     private DogView view(Dog dog) {

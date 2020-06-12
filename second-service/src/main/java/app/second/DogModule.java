@@ -28,5 +28,9 @@ public class DogModule extends Module {
         String dogId = dog.id;
         DogView getDog = dogService.get(dogId);
         logger.warn("get dog name: " + getDog.name);
+
+        dogService.partialUpdate(dogId);
+        DogView newDog = dogService.get(dogId);
+        logger.warn("new dog name: " + newDog.name);
     }
 }
