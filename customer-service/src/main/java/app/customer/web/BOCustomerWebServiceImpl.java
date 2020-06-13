@@ -38,6 +38,6 @@ public class BOCustomerWebServiceImpl implements BOCustomerWebService {
 
     @Override
     public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
-        return null;
+        return customerService.search(request);
     }
 }

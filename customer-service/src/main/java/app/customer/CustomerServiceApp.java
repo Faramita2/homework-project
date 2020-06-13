@@ -10,8 +10,6 @@ public class CustomerServiceApp extends App {
     @Override
     protected void initialize() {
         load(new SystemModule("sys.properties"));
-        http().httpPort(8080);
-
         load(new CustomerModule());
     }
 }

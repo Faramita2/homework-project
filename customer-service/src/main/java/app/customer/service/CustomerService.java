@@ -1,13 +1,15 @@
 package app.customer.service;
 
 import app.customer.api.customer.BOCreateCustomerRequest;
-import app.customer.api.customer.CustomerGenderView;
+import app.customer.api.customer.BOSearchCustomerRequest;
+import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
+import app.customer.api.customer.CustomerGenderView;
+import app.customer.api.customer.CustomerView;
 import app.customer.api.customer.SearchCustomerRequest;
 import app.customer.api.customer.SearchCustomerResponse;
-import app.customer.domain.CustomerGender;
-import app.customer.api.customer.CustomerView;
 import app.customer.domain.Customer;
+import app.customer.domain.CustomerGender;
 import core.framework.db.Query;
 import core.framework.db.Repository;
 import core.framework.inject.Inject;
@@ -52,15 +54,24 @@ public class CustomerService {
 
     public CustomerView update(Long id, BOUpdateCustomerRequest request) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
-        Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
-        if (existingCustomer.isPresent()) {
-            throw new ConflictException("customer already exists, name = " + request.name);
+
+        if (request.name != null) {
+            Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
+            if (existingCustomer.isPresent()) {
+                throw new ConflictException("customer already exists, name = " + request.name);
+            }
+            customer.name = request.name;
         }
-        customer.name = request.name;
-        customer.gender = CustomerGender.valueOf(request.gender.name());
-        customer.updatedTime = LocalDateTime.now();
-        customer.updatedBy = "CustomerService";
-        customerRepository.update(customer);
+
+        if (request.gender != null) {
+            customer.gender = CustomerGender.valueOf(request.gender.name());
+        }
+
+        if (request.name != null || request.gender != null) {
+            customer.updatedTime = LocalDateTime.now();
+            customer.updatedBy = "CustomerService";
+            customerRepository.update(customer);
+        }
 
         return view(customer);
     }
@@ -72,6 +83,22 @@ public class CustomerService {
 
     public SearchCustomerResponse search(SearchCustomerRequest request) {
         SearchCustomerResponse response = new SearchCustomerResponse();
+        Query<Customer> query = customerRepository.select();
+        query.skip(request.skip);
+        query.limit(request.limit);
+
+        if (request.gender != null) {
+            query.where("gender = ?", request.gender);
+        }
+
+        response.customers = query.fetch().stream().map(this::view).collect(Collectors.toList());
+        response.total = query.count();
+
+        return response;
+    }
+
+    public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
+        BOSearchCustomerResponse response = new BOSearchCustomerResponse();
         Query<Customer> query = customerRepository.select();
         query.skip(request.skip);
         query.limit(request.limit);
