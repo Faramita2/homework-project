@@ -17,4 +17,7 @@ public class BOSearchCustomerRequest {
 
     @QueryParam(name = "name")
     public String name;
+
+    @QueryParam(name = "gender")
+    public CustomerGenderView gender;
 }
