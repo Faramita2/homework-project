@@ -5,7 +5,7 @@ import core.framework.api.json.Property;
 /**
  * @author zoo
  */
-public enum CustomerGenderView {
+public enum CustomerGenderAJAXView {
     @Property(name = "MALE")
     MALE,
     @Property(name = "FEMALE")

@@ -1,15 +1,21 @@
 package app.customersite.api;
 
-import app.customersite.api.customer.CreateCustomerAJAXRequest;
-import app.customersite.api.customer.CustomerView;
-import core.framework.api.web.service.POST;
+import app.customersite.api.customer.CustomerAJAXView;
+import app.customersite.api.customer.SearchCustomerAJAXRequest;
+import app.customersite.api.customer.SearchCustomerAJAXResponse;
+import core.framework.api.web.service.GET;
 import core.framework.api.web.service.Path;
+import core.framework.api.web.service.PathParam;
 
 /**
  * @author zoo
  */
 public interface CustomerAJAXWebService {
-    @POST
+    @GET
+    @Path("/ajax/customer/:id")
+    CustomerAJAXView get(@PathParam("id") Long id);
+
+    @GET
     @Path("/ajax/customer")
-    CustomerView create(CreateCustomerAJAXRequest request);
+    SearchCustomerAJAXResponse search(SearchCustomerAJAXRequest request);
 }

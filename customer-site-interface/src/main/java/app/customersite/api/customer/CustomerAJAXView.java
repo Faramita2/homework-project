@@ -8,7 +8,7 @@ import core.framework.api.validate.NotNull;
 /**
  * @author zoo
  */
-public class CustomerView {
+public class CustomerAJAXView {
     @NotNull
     @Property(name = "id")
     public Long id;
@@ -20,5 +20,5 @@ public class CustomerView {
 
     @NotNull
     @Property(name = "gender")
-    public CustomerGenderView gender;
+    public CustomerGenderAJAXView gender;
 }
