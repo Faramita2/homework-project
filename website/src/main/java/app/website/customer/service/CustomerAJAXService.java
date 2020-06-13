@@ -2,6 +2,7 @@ package app.website.customer.service;
 
 import app.customer.api.CustomerWebService;
 import app.customer.api.customer.CustomerGenderView;
+import app.customer.api.customer.CustomerView;
 import app.customer.api.customer.SearchCustomerRequest;
 import app.customer.api.customer.SearchCustomerResponse;
 import app.website.api.customer.CustomerAJAXView;
@@ -47,7 +48,7 @@ public class CustomerAJAXService {
         return response;
     }
 
-    private CustomerAJAXView view(app.customer.api.customer.CustomerView customerView) {
+    private CustomerAJAXView view(CustomerView customerView) {
         CustomerAJAXView result = new CustomerAJAXView();
         result.id = customerView.id;
         result.name = customerView.name;
