@@ -101,7 +101,15 @@ project(':customer-service') {
     }
 }
 
-configure(subprojects.findAll { it.name.matches('.*-site-interface') }) {
+project(':customer-site') {
+    dependencies {
+        implementation project(':customer-service-interface')
+        implementation "core.framework:core-ng:${coreNGVersion}"
+        implementation project(':customer-site-interface')
+    }
+}
+
+project('customer-site-interface') {
     dependencies {
         implementation "core.framework:core-ng-api:${coreNGVersion}"
     }
