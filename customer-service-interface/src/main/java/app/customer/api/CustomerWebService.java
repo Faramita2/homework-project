@@ -1,8 +1,8 @@
 package app.customer.api;
 
-import app.customer.api.customer.BOSearchCustomerRequest;
-import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.CustomerView;
+import app.customer.api.customer.SearchCustomerRequest;
+import app.customer.api.customer.SearchCustomerResponse;
 import core.framework.api.web.service.GET;
 import core.framework.api.web.service.Path;
 import core.framework.api.web.service.PathParam;
@@ -17,5 +17,5 @@ public interface CustomerWebService {
 
     @GET
     @Path("/customer")
-    BOSearchCustomerResponse search(BOSearchCustomerRequest request);
+    SearchCustomerResponse search(SearchCustomerRequest request);
 }
