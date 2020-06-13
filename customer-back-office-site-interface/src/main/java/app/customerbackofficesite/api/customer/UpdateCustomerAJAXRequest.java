@@ -10,5 +10,5 @@ public class UpdateCustomerAJAXRequest {
     public String name;
 
     @Property(name = "gender")
-    public String gender;
+    public CustomerGenderAJAXView gender;
 }

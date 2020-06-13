@@ -15,5 +15,5 @@ public class CreateCustomerAJAXRequest {
 
     @NotNull
     @Property(name = "gender")
-    public String gender;
+    public CustomerGenderAJAXView gender;
 }

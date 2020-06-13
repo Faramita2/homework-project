@@ -13,11 +13,11 @@ public class SearchCustomerAJAXRequest {
 
     @NotNull
     @QueryParam(name = "limit")
-    public Integer limit = 0;
+    public Integer limit = 1000;
 
     @QueryParam(name = "name")
     public String name;
 
     @QueryParam(name = "gender")
-    public String gender;
+    public CustomerGenderAJAXView gender;
 }

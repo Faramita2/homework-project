@@ -1,3 +1,5 @@
+package app.customerbackofficesite.api;
+
 import app.customerbackofficesite.api.customer.CreateCustomerAJAXRequest;
 import app.customerbackofficesite.api.customer.CustomerAJAXView;
 import app.customerbackofficesite.api.customer.SearchCustomerAJAXRequest;
