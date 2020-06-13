@@ -1,5 +1,6 @@
-package app.website.api;
+package app.website.customer.web;
 
+import app.website.api.CustomerAJAXWebService;
 import app.website.api.customer.CustomerAJAXView;
 import app.website.api.customer.SearchCustomerAJAXRequest;
 import app.website.api.customer.SearchCustomerAJAXResponse;

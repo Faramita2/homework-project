@@ -1,6 +1,7 @@
 package app.website;
 
 import core.framework.module.App;
+import core.framework.module.SystemModule;
 
 /**
  * @author meow
@@ -8,9 +9,8 @@ import core.framework.module.App;
 public class WebsiteApp extends App {
     @Override
     protected void initialize() {
+        load(new SystemModule("sys.properties"));
         loadProperties("app.properties");
         load(new CustomerModule());
-
-        http().httpPort(8888);
     }
 }
