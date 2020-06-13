@@ -1,4 +1,4 @@
-package app.customersite.api.customer;
+package app.website.api.customer;
 
 import core.framework.api.validate.NotNull;
 import core.framework.api.web.service.QueryParam;

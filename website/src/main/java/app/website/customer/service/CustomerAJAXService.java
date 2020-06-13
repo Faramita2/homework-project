@@ -1,13 +1,13 @@
-package app.customersite.service;
+package app.website.customer.service;
 
 import app.customer.api.CustomerWebService;
 import app.customer.api.customer.CustomerGenderView;
 import app.customer.api.customer.SearchCustomerRequest;
 import app.customer.api.customer.SearchCustomerResponse;
-import app.customersite.api.customer.CustomerAJAXView;
-import app.customersite.api.customer.CustomerGenderAJAXView;
-import app.customersite.api.customer.SearchCustomerAJAXRequest;
-import app.customersite.api.customer.SearchCustomerAJAXResponse;
+import app.website.api.customer.CustomerAJAXView;
+import app.website.api.customer.CustomerGenderAJAXView;
+import app.website.api.customer.SearchCustomerAJAXRequest;
+import app.website.api.customer.SearchCustomerAJAXResponse;
 import core.framework.inject.Inject;
 
 import java.util.stream.Collectors;

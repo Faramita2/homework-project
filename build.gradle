@@ -101,17 +101,17 @@ project(':customer-service') {
     }
 }
 
-project('customer-site-interface') {
+project('website-interface') {
     dependencies {
         implementation "core.framework:core-ng-api:${coreNGVersion}"
     }
 }
 
-project(':customer-site') {
+project(':website') {
     dependencies {
         implementation project(':customer-service-interface')
         implementation "core.framework:core-ng:${coreNGVersion}"
-        implementation project(':customer-site-interface')
+        implementation project(':website-interface')
     }
 }
 

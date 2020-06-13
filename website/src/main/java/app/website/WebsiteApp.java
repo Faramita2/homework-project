@@ -1,11 +1,11 @@
-package app.customersite;
+package app.website;
 
 import core.framework.module.App;
 
 /**
  * @author meow
  */
-public class CustomerSiteApp extends App {
+public class WebsiteApp extends App {
     @Override
     protected void initialize() {
         loadProperties("app.properties");

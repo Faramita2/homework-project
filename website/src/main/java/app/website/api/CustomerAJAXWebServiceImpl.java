@@ -1,9 +1,9 @@
-package app.customersite.api;
+package app.website.api;
 
-import app.customersite.api.customer.CustomerAJAXView;
-import app.customersite.api.customer.SearchCustomerAJAXRequest;
-import app.customersite.api.customer.SearchCustomerAJAXResponse;
-import app.customersite.service.CustomerAJAXService;
+import app.website.api.customer.CustomerAJAXView;
+import app.website.api.customer.SearchCustomerAJAXRequest;
+import app.website.api.customer.SearchCustomerAJAXResponse;
+import app.website.customer.service.CustomerAJAXService;
 import core.framework.inject.Inject;
 
 /**
