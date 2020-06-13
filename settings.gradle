@@ -7,4 +7,6 @@ include 'demo-service',
         'customer-service-db-migration',
         'customer-service-interface',
         'customer-site',
-        'customer-site-interface'
+        'customer-site-interface',
+        'customer-back-office-site',
+        'customer-back-office-site-interface'
