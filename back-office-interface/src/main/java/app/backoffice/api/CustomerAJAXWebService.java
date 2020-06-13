@@ -1,10 +1,10 @@
-package app.customerbackofficesite.api;
+package app.backoffice.api;
 
-import app.customerbackofficesite.api.customer.CreateCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.CustomerAJAXView;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXResponse;
-import app.customerbackofficesite.api.customer.UpdateCustomerAJAXRequest;
+import app.backoffice.api.customer.CreateCustomerAJAXRequest;
+import app.backoffice.api.customer.CustomerAJAXView;
+import app.backoffice.api.customer.SearchCustomerAJAXRequest;
+import app.backoffice.api.customer.SearchCustomerAJAXResponse;
+import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
 import core.framework.api.http.HTTPStatus;
 import core.framework.api.web.service.DELETE;
 import core.framework.api.web.service.GET;

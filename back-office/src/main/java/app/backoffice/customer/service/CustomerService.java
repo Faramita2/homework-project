@@ -1,4 +1,4 @@
-package app.customerbackofficesite.service;
+package app.backoffice.customer.service;
 
 import app.customer.api.BOCustomerWebService;
 import app.customer.api.customer.BOCreateCustomerRequest;
@@ -7,12 +7,12 @@ import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.api.customer.CustomerGenderView;
 import app.customer.api.customer.CustomerView;
-import app.customerbackofficesite.api.customer.CreateCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.CustomerAJAXView;
-import app.customerbackofficesite.api.customer.CustomerGenderAJAXView;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXResponse;
-import app.customerbackofficesite.api.customer.UpdateCustomerAJAXRequest;
+import app.backoffice.api.customer.CreateCustomerAJAXRequest;
+import app.backoffice.api.customer.CustomerAJAXView;
+import app.backoffice.api.customer.CustomerGenderAJAXView;
+import app.backoffice.api.customer.SearchCustomerAJAXRequest;
+import app.backoffice.api.customer.SearchCustomerAJAXResponse;
+import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
 import core.framework.inject.Inject;
 
 import java.util.stream.Collectors;

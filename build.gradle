@@ -115,17 +115,17 @@ project(':customer-site') {
     }
 }
 
-project('customer-back-office-site-interface') {
+project('back-office-interface') {
     dependencies {
         implementation "core.framework:core-ng-api:${coreNGVersion}"
     }
 }
 
-project(':customer-back-office-site') {
+project(':back-office') {
     dependencies {
         implementation project(':customer-service-interface')
         implementation "core.framework:core-ng:${coreNGVersion}"
-        implementation project(':customer-back-office-site-interface')
+        implementation project(':back-office-interface')
     }
 }
 

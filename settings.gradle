@@ -8,5 +8,5 @@ include 'demo-service',
         'customer-service-interface',
         'customer-site',
         'customer-site-interface',
-        'customer-back-office-site',
-        'customer-back-office-site-interface'
+        'back-office',
+        'back-office-interface'

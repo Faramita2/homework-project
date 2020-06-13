@@ -1,4 +1,4 @@
-package app.customerbackofficesite;
+package app.backoffice;
 
 import core.framework.module.App;
 import core.framework.module.SystemModule;
@@ -6,7 +6,7 @@ import core.framework.module.SystemModule;
 /**
  * @author meow
  */
-public class CustomerBackOfficeSiteApp extends App {
+public class BackOfficeApp extends App {
     @Override
     protected void initialize() {
         load(new SystemModule("sys.properties"));

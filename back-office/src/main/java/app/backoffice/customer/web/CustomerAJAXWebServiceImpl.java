@@ -1,12 +1,12 @@
-package app.customerbackofficesite.web;
+package app.backoffice.customer.web;
 
-import app.customerbackofficesite.api.CustomerAJAXWebService;
-import app.customerbackofficesite.api.customer.CreateCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.CustomerAJAXView;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXRequest;
-import app.customerbackofficesite.api.customer.SearchCustomerAJAXResponse;
-import app.customerbackofficesite.api.customer.UpdateCustomerAJAXRequest;
-import app.customerbackofficesite.service.CustomerService;
+import app.backoffice.api.CustomerAJAXWebService;
+import app.backoffice.api.customer.CreateCustomerAJAXRequest;
+import app.backoffice.api.customer.CustomerAJAXView;
+import app.backoffice.api.customer.SearchCustomerAJAXRequest;
+import app.backoffice.api.customer.SearchCustomerAJAXResponse;
+import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
+import app.backoffice.customer.service.CustomerService;
 import core.framework.inject.Inject;
 
 /**

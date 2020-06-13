@@ -1,9 +1,9 @@
-package app.customerbackofficesite;
+package app.backoffice;
 
 import app.customer.api.BOCustomerWebService;
-import app.customerbackofficesite.api.CustomerAJAXWebService;
-import app.customerbackofficesite.service.CustomerService;
-import app.customerbackofficesite.web.CustomerAJAXWebServiceImpl;
+import app.backoffice.api.CustomerAJAXWebService;
+import app.backoffice.customer.service.CustomerService;
+import app.backoffice.customer.web.CustomerAJAXWebServiceImpl;
 import core.framework.module.Module;
 
 /**

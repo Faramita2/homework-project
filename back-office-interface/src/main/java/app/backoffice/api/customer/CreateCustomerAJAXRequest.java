@@ -1,4 +1,4 @@
-package app.customerbackofficesite.api.customer;
+package app.backoffice.api.customer;
 
 import core.framework.api.json.Property;
 import core.framework.api.validate.NotBlank;
