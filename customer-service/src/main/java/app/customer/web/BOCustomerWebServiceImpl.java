@@ -6,7 +6,7 @@ import app.customer.api.customer.CustomerView;
 import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
-import app.customer.service.CustomerService;
+import app.customer.service.BOCustomerService;
 import core.framework.inject.Inject;
 
 /**
@@ -14,30 +14,30 @@ import core.framework.inject.Inject;
  */
 public class BOCustomerWebServiceImpl implements BOCustomerWebService {
     @Inject
-    CustomerService customerService;
+    BOCustomerService service;
 
     @Override
     public CustomerView get(Long id) {
-        return customerService.get(id);
+        return service.get(id);
     }
 
     @Override
     public CustomerView create(BOCreateCustomerRequest request) {
-        return customerService.create(request);
+        return service.create(request);
     }
 
     @Override
     public CustomerView update(Long id, BOUpdateCustomerRequest request) {
-        return customerService.update(id, request);
+        return service.update(id, request);
     }
 
     @Override
     public void delete(Long id) {
-        customerService.delete(id);
+        service.delete(id);
     }
 
     @Override
     public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
-        return customerService.search(request);
+        return service.search(request);
     }
 }
