@@ -7,6 +7,7 @@ import core.framework.db.Database;
 import core.framework.db.Repository;
 import core.framework.db.Transaction;
 import core.framework.inject.Inject;
+import core.framework.util.Strings;
 import core.framework.web.exception.NotFoundException;
 
 import java.time.LocalDateTime;
@@ -41,13 +42,13 @@ public class CatService {
     }
 
     public CatView get(Long id) {
-        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("cat not found, id = {}", id)));
 
         return view(cat);
     }
 
     public CatView partialUpdate(Long id) {
-        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+        Cat cat = catRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("cat not found, id = {}", id)));
         cat.updatedTime = LocalDateTime.now();
         cat.gender = CatGender.FEMALE;
         catRepository.partialUpdate(cat);
@@ -56,8 +57,7 @@ public class CatService {
     }
 
     public CatView update(Long id) {
-        catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
-
+        catRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("cat not found, id = {}", id)));
         Cat newCat = new Cat();
         newCat.id = id;
         newCat.name = "han";
@@ -73,7 +73,7 @@ public class CatService {
     }
 
     public void delete(Long id) {
-        catRepository.get(id).orElseThrow(() -> new NotFoundException("cat not found, id = " + id));
+        catRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("cat not found, id = {}", id)));
         catRepository.delete(id);
     }
 

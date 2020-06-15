@@ -7,11 +7,11 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import core.framework.inject.Inject;
 import core.framework.mongo.MongoCollection;
+import core.framework.util.Strings;
 import core.framework.web.exception.NotFoundException;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-
 /**
  * @author zoo
  */
@@ -23,29 +23,30 @@ public class DogService {
         Dog dog = new Dog();
         dog.age = 1;
         dog.name = "qianqian";
+        dog.gender = DogGender.MALE;
         dog.createdTime = LocalDateTime.now();
         dog.updatedTime = LocalDateTime.now();
-        dog.gender = DogGender.MALE;
-        dog.id = UUID.randomUUID().toString();
+        dog.createdBy = "DogService";
+        dog.updatedBy = "DogService";
         dogCollection.insert(dog);
 
         return view(dog);
     }
 
-    public DogView get(String id) {
-        Dog dog = dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
+    public DogView get(ObjectId id) {
+        Dog dog = dogCollection.get(id).orElseThrow(() -> new NotFoundException(Strings.format("dog not found, id = {}", id)));
 
         return view(dog);
     }
 
-    public void update(String id) {
-        dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
+    public void update(ObjectId id) {
+        dogCollection.get(id).orElseThrow(() -> new NotFoundException(Strings.format("dog not found, id = {}", id)));
         dogCollection.update(Filters.eq("_id", id), Updates.combine(
             Updates.set("name", "moneymoney"), Updates.set("gender", DogGender.MALE)));
     }
 
-    public void replace(String id) {
-        dogCollection.get(id).orElseThrow(() -> new NotFoundException("dog not found, id = " + id));
+    public void replace(ObjectId id) {
+        dogCollection.get(id).orElseThrow(() -> new NotFoundException(Strings.format("dog not found, id = {}", id)));
         Dog newDog = new Dog();
         newDog.id = id;
         newDog.name = "gold";
@@ -53,6 +54,8 @@ public class DogService {
         newDog.age = 2;
         newDog.createdTime = LocalDateTime.now();
         newDog.updatedTime = LocalDateTime.now();
+        newDog.createdBy = "DogService";
+        newDog.updatedBy = "DogService";
         dogCollection.replace(newDog);
     }
 
