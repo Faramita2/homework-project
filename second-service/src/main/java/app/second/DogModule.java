@@ -5,7 +5,6 @@ import app.second.dog.domain.DogView;
 import app.second.dog.service.DogService;
 import core.framework.module.Module;
 import core.framework.mongo.module.MongoConfig;
-import core.framework.web.exception.NotFoundException;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
