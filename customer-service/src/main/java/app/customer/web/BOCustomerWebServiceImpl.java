@@ -2,10 +2,10 @@ package app.customer.web;
 
 import app.customer.api.BOCustomerWebService;
 import app.customer.api.customer.BOCreateCustomerRequest;
-import app.customer.api.customer.GetCustomerResponse;
 import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.service.BOCustomerService;
 import core.framework.inject.Inject;
 
@@ -23,7 +23,7 @@ public class BOCustomerWebServiceImpl implements BOCustomerWebService {
 
     @Override
     public void create(BOCreateCustomerRequest request) {
-       service.create(request);
+        service.create(request);
     }
 
     @Override

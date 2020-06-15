@@ -28,7 +28,12 @@ public class BOCustomerService {
     public GetCustomerResponse get(Long id) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
 
-        return view(customer);
+        GetCustomerResponse result = new GetCustomerResponse();
+        result.id = customer.id;
+        result.name = customer.name;
+        result.gender = CustomerGenderView.valueOf(customer.gender.name());
+
+        return result;
     }
 
     public void create(BOCreateCustomerRequest request) {
@@ -85,18 +90,16 @@ public class BOCustomerService {
             query.where("gender = ?", request.gender);
         }
 
-        response.customers = query.fetch().stream().map(this::view).collect(Collectors.toList());
+        response.customers = query.fetch().stream().map(customer -> {
+            BOSearchCustomerResponse.CustomerAJAXView view = new BOSearchCustomerResponse.CustomerAJAXView();
+            view.id = customer.id;
+            view.name = customer.name;
+            view.gender = CustomerGenderView.valueOf(customer.gender.name());
+
+            return view;
+        }).collect(Collectors.toList());
         response.total = query.count();
 
         return response;
-    }
-
-    private GetCustomerResponse view(Customer customer) {
-        GetCustomerResponse result = new GetCustomerResponse();
-        result.id = customer.id;
-        result.name = customer.name;
-        result.gender = CustomerGenderView.valueOf(customer.gender.name());
-
-        return result;
     }
 }
