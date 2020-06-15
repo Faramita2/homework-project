@@ -6,6 +6,7 @@ import app.second.dog.service.DogService;
 import core.framework.module.Module;
 import core.framework.mongo.module.MongoConfig;
 import core.framework.web.exception.NotFoundException;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,8 +19,8 @@ public class DogModule extends Module {
     @Override
     protected void initialize() {
         MongoConfig config = config(MongoConfig.class);
-        String url = "app.mongo.url";
-        config.uri(property(url).orElseThrow(() -> new NotFoundException("not found property: " + url)));
+        config.uri(requiredProperty("sys.mongo.url"));
+
         config.collection(Dog.class);
         DogService dogService = bind(DogService.class);
 
@@ -29,7 +30,7 @@ public class DogModule extends Module {
         logger.warn("dog gender: " + dog.gender);
 
         logger.warn("====================query action====================");
-        String dogId = dog.id;
+        ObjectId dogId = dog.id;
         DogView getDog = dogService.get(dogId);
         logger.warn("get dog name: " + getDog.name);
         logger.warn("get dog gender: " + getDog.gender);
