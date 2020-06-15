@@ -3,6 +3,7 @@ package app.second.dog.domain;
 import core.framework.api.json.Property;
 import core.framework.api.validate.NotBlank;
 import core.framework.api.validate.NotNull;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -11,7 +12,7 @@ import core.framework.api.validate.NotNull;
 public class DogView {
     @NotNull
     @Property(name = "id")
-    public String id;
+    public ObjectId id;
 
     @NotNull
     @NotBlank

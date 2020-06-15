@@ -5,6 +5,7 @@ import core.framework.api.validate.NotNull;
 import core.framework.mongo.Collection;
 import core.framework.mongo.Field;
 import core.framework.mongo.Id;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Collection(name = "dogs")
 public class Dog {
     @Id
-    public String id;
+    public ObjectId id;
 
     @NotNull
     @NotBlank
@@ -36,4 +37,14 @@ public class Dog {
     @NotNull
     @Field(name = "updated_time")
     public LocalDateTime updatedTime;
+
+    @NotNull
+    @NotBlank
+    @Field(name = "created_by")
+    public String createdBy;
+
+    @NotNull
+    @NotBlank
+    @Field(name = "updated_by")
+    public String updatedBy;
 }
