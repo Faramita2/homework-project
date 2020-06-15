@@ -2,7 +2,7 @@ package app.customer.web;
 
 import app.customer.api.BOCustomerWebService;
 import app.customer.api.customer.BOCreateCustomerRequest;
-import app.customer.api.customer.CustomerView;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
@@ -17,18 +17,18 @@ public class BOCustomerWebServiceImpl implements BOCustomerWebService {
     BOCustomerService service;
 
     @Override
-    public CustomerView get(Long id) {
+    public GetCustomerResponse get(Long id) {
         return service.get(id);
     }
 
     @Override
-    public CustomerView create(BOCreateCustomerRequest request) {
-        return service.create(request);
+    public void create(BOCreateCustomerRequest request) {
+       service.create(request);
     }
 
     @Override
-    public CustomerView update(Long id, BOUpdateCustomerRequest request) {
-        return service.update(id, request);
+    public void update(Long id, BOUpdateCustomerRequest request) {
+        service.update(id, request);
     }
 
     @Override

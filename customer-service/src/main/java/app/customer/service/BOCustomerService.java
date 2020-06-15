@@ -5,9 +5,7 @@ import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.api.customer.CustomerGenderView;
-import app.customer.api.customer.CustomerView;
-import app.customer.api.customer.SearchCustomerRequest;
-import app.customer.api.customer.SearchCustomerResponse;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.domain.Customer;
 import app.customer.domain.CustomerGender;
 import core.framework.db.Query;
@@ -27,13 +25,13 @@ public class BOCustomerService {
     @Inject
     Repository<Customer> customerRepository;
 
-    public CustomerView get(Long id) {
+    public GetCustomerResponse get(Long id) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
 
         return view(customer);
     }
 
-    public CustomerView create(BOCreateCustomerRequest request) {
+    public void create(BOCreateCustomerRequest request) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
         if (existingCustomer.isPresent()) {
             throw new ConflictException("customer already exists, name = " + request.name);
@@ -47,12 +45,10 @@ public class BOCustomerService {
         customer.createdBy = "CustomerService";
         customer.updatedBy = "CustomerService";
 
-        customer.id = customerRepository.insert(customer).orElseThrow();
-
-        return view(customer);
+        customerRepository.insert(customer).orElseThrow();
     }
 
-    public CustomerView update(Long id, BOUpdateCustomerRequest request) {
+    public void update(Long id, BOUpdateCustomerRequest request) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
 
         if (request.name != null) {
@@ -72,29 +68,11 @@ public class BOCustomerService {
             customer.updatedBy = "CustomerService";
             customerRepository.update(customer);
         }
-
-        return view(customer);
     }
 
     public void delete(Long id) {
         customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
         customerRepository.delete(id);
-    }
-
-    public SearchCustomerResponse search(SearchCustomerRequest request) {
-        SearchCustomerResponse response = new SearchCustomerResponse();
-        Query<Customer> query = customerRepository.select();
-        query.skip(request.skip);
-        query.limit(request.limit);
-
-        if (request.gender != null) {
-            query.where("gender = ?", request.gender);
-        }
-
-        response.customers = query.fetch().stream().map(this::view).collect(Collectors.toList());
-        response.total = query.count();
-
-        return response;
     }
 
     public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
@@ -113,8 +91,8 @@ public class BOCustomerService {
         return response;
     }
 
-    private CustomerView view(Customer customer) {
-        CustomerView result = new CustomerView();
+    private GetCustomerResponse view(Customer customer) {
+        GetCustomerResponse result = new GetCustomerResponse();
         result.id = customer.id;
         result.name = customer.name;
         result.gender = CustomerGenderView.valueOf(customer.gender.name());

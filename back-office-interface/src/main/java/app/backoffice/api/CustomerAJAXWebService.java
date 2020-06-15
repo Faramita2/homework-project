@@ -1,7 +1,7 @@
 package app.backoffice.api;
 
 import app.backoffice.api.customer.CreateCustomerAJAXRequest;
-import app.backoffice.api.customer.CustomerAJAXView;
+import app.backoffice.api.customer.GetCustomerAJAXResponse;
 import app.backoffice.api.customer.SearchCustomerAJAXRequest;
 import app.backoffice.api.customer.SearchCustomerAJAXResponse;
 import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
@@ -20,16 +20,16 @@ import core.framework.api.web.service.ResponseStatus;
 public interface CustomerAJAXWebService {
     @GET
     @Path("/ajax/customer/:id")
-    CustomerAJAXView get(@PathParam("id") Long id);
+    GetCustomerAJAXResponse get(@PathParam("id") Long id);
 
     @POST
     @Path("/ajax/customer")
     @ResponseStatus(HTTPStatus.CREATED)
-    CustomerAJAXView create(CreateCustomerAJAXRequest request);
+    void create(CreateCustomerAJAXRequest request);
 
     @PUT
     @Path("/ajax/customer/:id")
-    CustomerAJAXView update(@PathParam("id") Long id, UpdateCustomerAJAXRequest request);
+    void update(@PathParam("id") Long id, UpdateCustomerAJAXRequest request);
 
     @DELETE
     @Path("/ajax/customer/:id")

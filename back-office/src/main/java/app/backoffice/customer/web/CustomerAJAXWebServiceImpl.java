@@ -2,7 +2,7 @@ package app.backoffice.customer.web;
 
 import app.backoffice.api.CustomerAJAXWebService;
 import app.backoffice.api.customer.CreateCustomerAJAXRequest;
-import app.backoffice.api.customer.CustomerAJAXView;
+import app.backoffice.api.customer.GetCustomerAJAXResponse;
 import app.backoffice.api.customer.SearchCustomerAJAXRequest;
 import app.backoffice.api.customer.SearchCustomerAJAXResponse;
 import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
@@ -17,18 +17,18 @@ public class CustomerAJAXWebServiceImpl implements CustomerAJAXWebService {
     CustomerService customerService;
 
     @Override
-    public CustomerAJAXView get(Long id) {
+    public GetCustomerAJAXResponse get(Long id) {
         return customerService.get(id);
     }
 
     @Override
-    public CustomerAJAXView create(CreateCustomerAJAXRequest request) {
-        return customerService.create(request);
+    public void create(CreateCustomerAJAXRequest request) {
+        customerService.create(request);
     }
 
     @Override
-    public CustomerAJAXView update(Long id, UpdateCustomerAJAXRequest request) {
-        return customerService.update(id, request);
+    public void update(Long id, UpdateCustomerAJAXRequest request) {
+        customerService.update(id, request);
     }
 
     @Override

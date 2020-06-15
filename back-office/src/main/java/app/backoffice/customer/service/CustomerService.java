@@ -1,18 +1,18 @@
 package app.backoffice.customer.service;
 
+import app.backoffice.api.customer.CreateCustomerAJAXRequest;
+import app.backoffice.api.customer.CustomerGenderAJAXView;
+import app.backoffice.api.customer.GetCustomerAJAXResponse;
+import app.backoffice.api.customer.SearchCustomerAJAXRequest;
+import app.backoffice.api.customer.SearchCustomerAJAXResponse;
+import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
 import app.customer.api.BOCustomerWebService;
 import app.customer.api.customer.BOCreateCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.api.customer.CustomerGenderView;
-import app.customer.api.customer.CustomerView;
-import app.backoffice.api.customer.CreateCustomerAJAXRequest;
-import app.backoffice.api.customer.CustomerAJAXView;
-import app.backoffice.api.customer.CustomerGenderAJAXView;
-import app.backoffice.api.customer.SearchCustomerAJAXRequest;
-import app.backoffice.api.customer.SearchCustomerAJAXResponse;
-import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
+import app.customer.api.customer.GetCustomerResponse;
 import core.framework.inject.Inject;
 
 import java.util.stream.Collectors;
@@ -24,19 +24,25 @@ public class CustomerService {
     @Inject
     BOCustomerWebService service;
 
-    public CustomerAJAXView get(Long id) {
-        return view(service.get(id));
+    public GetCustomerAJAXResponse get(Long id) {
+        GetCustomerResponse customerView = service.get(id);
+        GetCustomerAJAXResponse result = new GetCustomerAJAXResponse();
+        result.id = customerView.id;
+        result.name = customerView.name;
+        result.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
+
+        return result;
     }
 
-    public CustomerAJAXView create(CreateCustomerAJAXRequest request) {
+    public void create(CreateCustomerAJAXRequest request) {
         BOCreateCustomerRequest boCreateCustomerRequest = new BOCreateCustomerRequest();
         boCreateCustomerRequest.name = request.name;
         boCreateCustomerRequest.gender = CustomerGenderView.valueOf(request.gender.name());
 
-        return view(service.create(boCreateCustomerRequest));
+        service.create(boCreateCustomerRequest);
     }
 
-    public CustomerAJAXView update(Long id, UpdateCustomerAJAXRequest request) {
+    public void update(Long id, UpdateCustomerAJAXRequest request) {
         BOUpdateCustomerRequest boUpdateCustomerRequest = new BOUpdateCustomerRequest();
 
         if (request.name != null) {
@@ -47,7 +53,7 @@ public class CustomerService {
             boUpdateCustomerRequest.gender = CustomerGenderView.valueOf(request.gender.name());
         }
 
-        return view(service.update(id, boUpdateCustomerRequest));
+        service.update(id, boUpdateCustomerRequest);
     }
 
     public void delete(Long id) {
@@ -73,7 +79,7 @@ public class CustomerService {
 
         response.total = boSearchCustomerResponse.total;
         response.customers = boSearchCustomerResponse.customers.parallelStream().map(customerView -> {
-            CustomerAJAXView customerAJAXView = new CustomerAJAXView();
+            SearchCustomerAJAXResponse.CustomerAJAXView customerAJAXView = new SearchCustomerAJAXResponse.CustomerAJAXView();
             customerAJAXView.id = customerView.id;
             customerAJAXView.name = customerView.name;
             customerAJAXView.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
@@ -82,14 +88,5 @@ public class CustomerService {
         }).collect(Collectors.toList());
 
         return response;
-    }
-
-    private CustomerAJAXView view(CustomerView customerView) {
-        CustomerAJAXView result = new CustomerAJAXView();
-        result.id = customerView.id;
-        result.name = customerView.name;
-        result.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
-
-        return result;
     }
 }

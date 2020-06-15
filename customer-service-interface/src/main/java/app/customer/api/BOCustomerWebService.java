@@ -1,7 +1,7 @@
 package app.customer.api;
 
 import app.customer.api.customer.BOCreateCustomerRequest;
-import app.customer.api.customer.CustomerView;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.api.customer.BOSearchCustomerRequest;
 import app.customer.api.customer.BOSearchCustomerResponse;
 import app.customer.api.customer.BOUpdateCustomerRequest;
@@ -20,16 +20,16 @@ import core.framework.api.web.service.ResponseStatus;
 public interface BOCustomerWebService {
     @GET
     @Path("/bo/customer/:id")
-    CustomerView get(@PathParam("id") Long id);
+    GetCustomerResponse get(@PathParam("id") Long id);
 
     @POST
     @Path("/bo/customer")
     @ResponseStatus(HTTPStatus.CREATED)
-    CustomerView create(BOCreateCustomerRequest request);
+    void create(BOCreateCustomerRequest request);
 
     @PUT
     @Path("/bo/customer/:id")
-    CustomerView update(@PathParam("id") Long id, BOUpdateCustomerRequest request);
+    void update(@PathParam("id") Long id, BOUpdateCustomerRequest request);
 
     @DELETE
     @Path("/bo/customer/:id")

@@ -1,14 +1,13 @@
-package app.customer.api.customer;
+package app.website.api.customer;
 
 import core.framework.api.json.Property;
 import core.framework.api.validate.NotBlank;
 import core.framework.api.validate.NotNull;
 
-
 /**
  * @author zoo
  */
-public class CustomerView {
+public class GetCustomerAJAXResponse {
     @NotNull
     @Property(name = "id")
     public Long id;
@@ -20,5 +19,5 @@ public class CustomerView {
 
     @NotNull
     @Property(name = "gender")
-    public CustomerGenderView gender;
+    public CustomerGenderAJAXView gender;
 }

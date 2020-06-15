@@ -1,7 +1,7 @@
 package app.customer.service;
 
 import app.customer.api.customer.CustomerGenderView;
-import app.customer.api.customer.CustomerView;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.api.customer.SearchCustomerRequest;
 import app.customer.api.customer.SearchCustomerResponse;
 import app.customer.domain.Customer;
@@ -19,7 +19,7 @@ public class CustomerService {
     @Inject
     Repository<Customer> customerRepository;
 
-    public CustomerView get(Long id) {
+    public GetCustomerResponse get(Long id) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
 
         return view(customer);
@@ -41,8 +41,8 @@ public class CustomerService {
         return response;
     }
 
-    private CustomerView view(Customer customer) {
-        CustomerView result = new CustomerView();
+    private GetCustomerResponse view(Customer customer) {
+        GetCustomerResponse result = new GetCustomerResponse();
         result.id = customer.id;
         result.name = customer.name;
         result.gender = CustomerGenderView.valueOf(customer.gender.name());

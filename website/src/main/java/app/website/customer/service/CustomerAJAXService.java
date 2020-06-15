@@ -2,11 +2,11 @@ package app.website.customer.service;
 
 import app.customer.api.CustomerWebService;
 import app.customer.api.customer.CustomerGenderView;
-import app.customer.api.customer.CustomerView;
+import app.customer.api.customer.GetCustomerResponse;
 import app.customer.api.customer.SearchCustomerRequest;
 import app.customer.api.customer.SearchCustomerResponse;
-import app.website.api.customer.CustomerAJAXView;
 import app.website.api.customer.CustomerGenderAJAXView;
+import app.website.api.customer.GetCustomerAJAXResponse;
 import app.website.api.customer.SearchCustomerAJAXRequest;
 import app.website.api.customer.SearchCustomerAJAXResponse;
 import core.framework.inject.Inject;
@@ -20,8 +20,14 @@ public class CustomerAJAXService {
     @Inject
     CustomerWebService customerWebService;
 
-    public CustomerAJAXView get(Long id) {
-        return view(customerWebService.get(id));
+    public GetCustomerAJAXResponse get(Long id) {
+        GetCustomerResponse getCustomerResponse = customerWebService.get(id);
+        GetCustomerAJAXResponse response = new GetCustomerAJAXResponse();
+        response.id = getCustomerResponse.id;
+        response.name = getCustomerResponse.name;
+        response.gender = CustomerGenderAJAXView.valueOf(getCustomerResponse.gender.name());
+
+        return response;
     }
 
     public SearchCustomerAJAXResponse search(SearchCustomerAJAXRequest request) {
@@ -37,7 +43,7 @@ public class CustomerAJAXService {
 
         response.total = searchCustomerResponse.total;
         response.customers = searchCustomerResponse.customers.parallelStream().map(customerView -> {
-            CustomerAJAXView customerAJAXView = new CustomerAJAXView();
+            SearchCustomerAJAXResponse.CustomerAJAXView customerAJAXView = new SearchCustomerAJAXResponse.CustomerAJAXView();
             customerAJAXView.id = customerView.id;
             customerAJAXView.name = customerView.name;
             customerAJAXView.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
@@ -46,14 +52,5 @@ public class CustomerAJAXService {
         }).collect(Collectors.toList());
 
         return response;
-    }
-
-    private CustomerAJAXView view(CustomerView customerView) {
-        CustomerAJAXView result = new CustomerAJAXView();
-        result.id = customerView.id;
-        result.name = customerView.name;
-        result.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
-
-        return result;
     }
 }

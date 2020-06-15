@@ -7,7 +7,7 @@ import core.framework.api.validate.NotNull;
 /**
  * @author meow
  */
-public class CustomerAJAXView {
+public class GetCustomerAJAXResponse {
     @NotNull
     @Property(name = "id")
     public Long id;
