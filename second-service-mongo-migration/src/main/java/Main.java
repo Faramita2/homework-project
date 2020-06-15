@@ -14,7 +14,8 @@ public class Main {
 
         migration = new MongoMigration("sys.properties");
         migration.migrate(mongo -> {
-            mongo.createIndex("test", Indexes.ascending("name"));
+            mongo.createIndex("dogs", Indexes.ascending("name"));
+            mongo.createIndex("dogs", Indexes.ascending("age"));
         });
     }
 }
