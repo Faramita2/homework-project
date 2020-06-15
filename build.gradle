@@ -1,7 +1,7 @@
 apply from: file("${rootDir}/gradle/project.gradle")
 
 subprojects {
-    group = 'core.demo'
+    group = 'com.lgzzzz'
     version = '1.0.0'
 
     repositories {
@@ -60,74 +60,58 @@ configure(subprojects.findAll { it.name.endsWith('-mongo-migration') }) {
     }
 }
 
-configure(subprojects.findAll { it.name.matches('.*-service-interface') }) {
+configure(subprojects.findAll { it.name.matches('.*-interface') }) {
     dependencies {
         implementation "core.framework:core-ng-api:${coreNGVersion}"
     }
 }
 
-configure([project(':demo-service')]) {
-    apply from: file("${rootDir}/gradle/app.gradle")
+// services use core-ng
+configure([project(':demo-service'),
+           project(':first-service'),
+           project(':second-service'),
+           project(':customer-service'),
+           project(':back-office'),
+           project(':website')]) {
     dependencies {
         implementation "core.framework:core-ng:${coreNGVersion}"
         testImplementation "core.framework:core-ng-test:${coreNGVersion}"
     }
 }
 
-configure([project(':first-service')]) {
-    apply from: file("${rootDir}/gradle/app.gradle")
-    dependencies {
-        implementation "core.framework:core-ng:${coreNGVersion}"
-        testImplementation "core.framework:core-ng-test:${coreNGVersion}"
-    }
-}
-
+// services use mongo
 configure([project(':second-service')]) {
-    apply from: file("${rootDir}/gradle/app.gradle")
     dependencies {
-        implementation "core.framework:core-ng:${coreNGVersion}"
-        implementation  "core.framework:core-ng-mongo:${mongoVersion}"
-        runtimeOnly  "mysql:mysql-connector-java:${mysqlVersion}"
-        testImplementation "core.framework:core-ng-test:${coreNGVersion}"
+        implementation "core.framework:core-ng-mongo:${mongoVersion}"
     }
 }
 
-project(':customer-service') {
+// services use db
+configure([project(':second-service'),
+           project(':customer-service')]) {
     dependencies {
-        implementation "core.framework:core-ng:${coreNGVersion}"
-        implementation project(':customer-service-interface')
         runtimeOnly "mysql:mysql-connector-java:${mysqlVersion}"
         testRuntimeOnly "org.hsqldb:hsqldb:${hsqlVersion}"
     }
 }
 
-project('website-interface') {
+// services use customer-service-interface
+configure([project(':customer-service'),
+           project(':back-office'),
+           project(':website')]) {
     dependencies {
-        implementation "core.framework:core-ng-api:${coreNGVersion}"
+        implementation project(':customer-service-interface')
+    }
+}
+
+project( ':back-office') {
+    dependencies {
+        implementation project(':back-office-interface')
     }
 }
 
 project(':website') {
     dependencies {
-        implementation project(':customer-service-interface')
-        implementation "core.framework:core-ng:${coreNGVersion}"
         implementation project(':website-interface')
     }
-}
-
-project('back-office-interface') {
-    dependencies {
-        implementation "core.framework:core-ng-api:${coreNGVersion}"
-    }
-}
-
-project(':back-office') {
-    dependencies {
-        implementation project(':customer-service-interface')
-        implementation "core.framework:core-ng:${coreNGVersion}"
-        implementation project(':back-office-interface')
-    }
-}
-
-project(':demo-service') {
 }
