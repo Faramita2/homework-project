@@ -36,8 +36,12 @@ public class CustomerService {
         query.skip(request.skip);
         query.limit(request.limit);
 
+        if (request.name != null) {
+            query.where("name = ?", request.name);
+        }
+
         if (request.gender != null) {
-            query.where("gender = ?", request.gender);
+            query.where("gender = ?", request.gender.name());
         }
 
         response.customers = query.fetch().stream().map(customer -> {

@@ -34,6 +34,11 @@ public class CustomerAJAXService {
         SearchCustomerRequest searchCustomerRequest = new SearchCustomerRequest();
         searchCustomerRequest.skip = request.skip;
         searchCustomerRequest.limit = request.limit;
+
+        if (request.name != null) {
+            searchCustomerRequest.name = request.name;
+        }
+
         if (request.gender != null) {
             searchCustomerRequest.gender = CustomerGenderView.valueOf(request.gender.name());
         }

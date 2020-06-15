@@ -15,6 +15,9 @@ public class SearchCustomerRequest {
     @QueryParam(name = "limit")
     public Integer limit = 1000;
 
+    @QueryParam(name = "name")
+    public String name;
+
     @QueryParam(name = "gender")
     public CustomerGenderView gender;
 }
