@@ -1,6 +1,5 @@
 package app.consumer;
 
-import app.producer.api.producer.ProducerCreatedRequest;
 import core.framework.module.App;
 import core.framework.module.SystemModule;
 

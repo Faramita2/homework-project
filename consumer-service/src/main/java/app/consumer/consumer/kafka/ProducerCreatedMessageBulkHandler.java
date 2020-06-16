@@ -3,7 +3,6 @@ package app.consumer.consumer.kafka;
 import app.producer.api.producer.kafka.ProducerCreatedMessage;
 import core.framework.kafka.BulkMessageHandler;
 import core.framework.kafka.Message;
-import core.framework.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +16,7 @@ public class ProducerCreatedMessageBulkHandler implements BulkMessageHandler<Pro
 
     @Override
     public void handle(List<Message<ProducerCreatedMessage>> messages) throws Exception {
-        messages.forEach(message -> {
-            logger.info(Strings.format("receive producer created message, id = {}, desc = {}, createdTime = {}",
-                message.value.id, message.value.desc, message.value.createdTime));
-        });
+        messages.forEach(message -> logger.info("receive producer created message, id = {}, desc = {}, createdTime = {}",
+            message.value.id, message.value.desc, message.value.createdTime));
     }
 }
