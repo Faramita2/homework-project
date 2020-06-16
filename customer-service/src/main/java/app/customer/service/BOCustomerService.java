@@ -13,6 +13,8 @@ import core.framework.db.Repository;
 import core.framework.inject.Inject;
 import core.framework.web.exception.ConflictException;
 import core.framework.web.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
  * @author zoo
  */
 public class BOCustomerService {
+    private final Logger logger = LoggerFactory.getLogger(BOCustomerService.class);
     @Inject
     Repository<Customer> customerRepository;
 
@@ -61,11 +64,14 @@ public class BOCustomerService {
         customer.updatedBy = "CustomerService";
 
         customerRepository.partialUpdate(customer);
+        logger.info("update customer id = {}, name = {}, gender = {}, updatedTime = {}, updatedBy = {}",
+                    id, customer.name, customer.gender.name(), customer.updatedTime, customer.updatedBy);
     }
 
     public void delete(Long id) {
         customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
         customerRepository.delete(id);
+        logger.info("delete customer id = {}", id);
     }
 
     public BOSearchCustomerResponse search(BOSearchCustomerRequest request) {
