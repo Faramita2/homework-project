@@ -9,4 +9,9 @@ include 'demo-service',
         'website',
         'website-interface',
         'back-office',
-        'back-office-interface'
+        'back-office-interface',
+        'producer-service',
+        'producer-service-interface'
+include 'producer-service'
+include 'producer-service'
+
