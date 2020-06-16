@@ -37,10 +37,7 @@ public class BOCustomerService {
     }
 
     public void create(BOCreateCustomerRequest request) {
-        Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
-        if (existingCustomer.isPresent()) {
-            throw new ConflictException("customer already exists, name = " + request.name);
-        }
+        checkNameUnique(request.name);
 
         Customer customer = new Customer();
         customer.name = request.name;
@@ -56,23 +53,14 @@ public class BOCustomerService {
     public void update(Long id, BOUpdateCustomerRequest request) {
         Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
 
-        if (request.name != null) {
-            Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", request.name);
-            if (existingCustomer.isPresent()) {
-                throw new ConflictException("customer already exists, name = " + request.name);
-            }
-            customer.name = request.name;
-        }
+        checkNameUnique(request.name);
 
-        if (request.gender != null) {
-            customer.gender = CustomerGender.valueOf(request.gender.name());
-        }
+        customer.name = request.name;
+        customer.gender = CustomerGender.valueOf(request.gender.name());
+        customer.updatedTime = LocalDateTime.now();
+        customer.updatedBy = "CustomerService";
 
-        if (request.name != null || request.gender != null) {
-            customer.updatedTime = LocalDateTime.now();
-            customer.updatedBy = "CustomerService";
-            customerRepository.update(customer);
-        }
+        customerRepository.partialUpdate(customer);
     }
 
     public void delete(Long id) {
@@ -105,5 +93,12 @@ public class BOCustomerService {
         response.total = query.count();
 
         return response;
+    }
+
+    private void checkNameUnique(String name) {
+        Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", name);
+        if (existingCustomer.isPresent()) {
+            throw new ConflictException("customer already exists, name = " + name);
+        }
     }
 }
