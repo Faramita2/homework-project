@@ -103,20 +103,20 @@ public class BOCustomerService {
     }
 
     private Customer findCustomer(Long id) {
-        return customerRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("customer not found, id = {}", id), "CUSTOMER-NOT-FOUND"));
+        return customerRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("customer not found, id = {}", id), "CUSTOMER_NOT_FOUND"));
     }
 
     private void checkNameUnique(String name) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", name);
         if (existingCustomer.isPresent()) {
-            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER-CONFLICT-NAME");
+            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER_CONFLICT_NAME");
         }
     }
 
     private void checkNameUnique(Long id, String name) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("id <> ? and name = ?", id, name);
         if (existingCustomer.isPresent()) {
-            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER-CONFLICT-NAME");
+            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER_CONFLICT_NAME");
         }
     }
 }

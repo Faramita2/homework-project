@@ -8,6 +8,7 @@ import app.customer.domain.Customer;
 import core.framework.db.Query;
 import core.framework.db.Repository;
 import core.framework.inject.Inject;
+import core.framework.util.Strings;
 import core.framework.web.exception.NotFoundException;
 
 import java.util.stream.Collectors;
@@ -20,7 +21,8 @@ public class CustomerService {
     Repository<Customer> customerRepository;
 
     public GetCustomerResponse get(Long id) {
-        Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        Customer customer = customerRepository.get(id).orElseThrow(
+            () -> new NotFoundException(Strings.format("customer not found, id = {}", id), "CUSTOMER_NOT_FOUND"));
 
         GetCustomerResponse result = new GetCustomerResponse();
         result.id = customer.id;
