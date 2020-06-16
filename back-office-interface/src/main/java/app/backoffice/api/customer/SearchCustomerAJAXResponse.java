@@ -14,9 +14,9 @@ public class SearchCustomerAJAXResponse {
     public Long total;
 
     @Property(name = "customers")
-    public List<CustomerAJAXView> customers;
+    public List<Customer> customers;
 
-    public static class CustomerAJAXView {
+    public static class Customer {
         @NotNull
         @Property(name = "id")
         public Long id;

@@ -79,12 +79,12 @@ public class CustomerService {
 
         response.total = boSearchCustomerResponse.total;
         response.customers = boSearchCustomerResponse.customers.parallelStream().map(customerView -> {
-            SearchCustomerAJAXResponse.CustomerAJAXView customerAJAXView = new SearchCustomerAJAXResponse.CustomerAJAXView();
-            customerAJAXView.id = customerView.id;
-            customerAJAXView.name = customerView.name;
-            customerAJAXView.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
+            SearchCustomerAJAXResponse.Customer customer = new SearchCustomerAJAXResponse.Customer();
+            customer.id = customerView.id;
+            customer.name = customerView.name;
+            customer.gender = CustomerGenderAJAXView.valueOf(customerView.gender.name());
 
-            return customerAJAXView;
+            return customer;
         }).collect(Collectors.toList());
 
         return response;
