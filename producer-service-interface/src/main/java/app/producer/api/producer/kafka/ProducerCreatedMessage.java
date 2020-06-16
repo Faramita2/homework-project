@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ProducerCreatedMessage {
     @NotNull
     @Property(name = "id")
-    public Long id;
+    public String id;
 
     @Property(name = "desc")
     public String desc;
