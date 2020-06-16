@@ -64,7 +64,8 @@ configure([project(':demo-service'),
            project(':customer-service'),
            project(':back-office'),
            project(':website'),
-           project(':producer-service')]) {
+           project(':producer-service'),
+           project(':consumer-service')]) {
     dependencies {
         implementation "core.framework:core-ng:${coreNGVersion}"
         testImplementation "core.framework:core-ng-test:${coreNGVersion}"
@@ -108,7 +109,8 @@ project(':website') {
     }
 }
 
-project(':producer-service') {
+configure([project(':producer-service'),
+           project(':consumer-service')]) {
     dependencies {
         implementation project(':producer-service-interface')
     }

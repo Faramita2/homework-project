@@ -12,8 +12,6 @@ public class ProducerServiceApp extends App {
     @Override
     protected void initialize() {
         load(new SystemModule("sys.properties"));
-        kafka().publish("producer-created", ProducerCreatedMessage.class);
-        kafka().publish("producer-updated", ProducerUpdatedMessage.class);
         load(new ProducerModule());
     }
 }

@@ -11,7 +11,5 @@ include 'demo-service',
         'back-office',
         'back-office-interface',
         'producer-service',
-        'producer-service-interface'
-include 'producer-service'
-include 'producer-service'
-
+        'producer-service-interface',
+        'consumer-service'
