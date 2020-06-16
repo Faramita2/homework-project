@@ -11,5 +11,6 @@ public class ConsumerServiceApp extends App {
     protected void initialize() {
         load(new SystemModule("sys.properties"));
         load(new ConsumerModule());
+        load(new ExecutorModule());
     }
 }
