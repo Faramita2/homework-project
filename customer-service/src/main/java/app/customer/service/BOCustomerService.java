@@ -11,6 +11,7 @@ import app.customer.domain.CustomerGender;
 import core.framework.db.Query;
 import core.framework.db.Repository;
 import core.framework.inject.Inject;
+import core.framework.util.Strings;
 import core.framework.web.exception.ConflictException;
 import core.framework.web.exception.NotFoundException;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class BOCustomerService {
     Repository<Customer> customerRepository;
 
     public GetCustomerResponse get(Long id) {
-        Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        Customer customer = findCustomer(id);
 
         GetCustomerResponse result = new GetCustomerResponse();
         result.id = customer.id;
@@ -54,9 +55,9 @@ public class BOCustomerService {
     }
 
     public void update(Long id, BOUpdateCustomerRequest request) {
-        Customer customer = customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        Customer customer = findCustomer(id);
 
-        checkNameUnique(request.name);
+        checkNameUnique(id, request.name);
 
         customer.name = request.name;
         customer.gender = CustomerGender.valueOf(request.gender.name());
@@ -65,11 +66,11 @@ public class BOCustomerService {
 
         customerRepository.partialUpdate(customer);
         logger.info("update customer id = {}, name = {}, gender = {}, updatedTime = {}, updatedBy = {}",
-                    id, customer.name, customer.gender.name(), customer.updatedTime, customer.updatedBy);
+            id, customer.name, customer.gender.name(), customer.updatedTime, customer.updatedBy);
     }
 
     public void delete(Long id) {
-        customerRepository.get(id).orElseThrow(() -> new NotFoundException("customer not found, id = " + id));
+        findCustomer(id);
         customerRepository.delete(id);
         logger.info("delete customer id = {}", id);
     }
@@ -101,10 +102,21 @@ public class BOCustomerService {
         return response;
     }
 
+    private Customer findCustomer(Long id) {
+        return customerRepository.get(id).orElseThrow(() -> new NotFoundException(Strings.format("customer not found, id = {}", id), "CUSTOMER-NOT-FOUND"));
+    }
+
     private void checkNameUnique(String name) {
         Optional<Customer> existingCustomer = customerRepository.selectOne("name = ?", name);
         if (existingCustomer.isPresent()) {
-            throw new ConflictException("customer already exists, name = " + name);
+            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER-CONFLICT-NAME");
+        }
+    }
+
+    private void checkNameUnique(Long id, String name) {
+        Optional<Customer> existingCustomer = customerRepository.selectOne("id <> ? and name = ?", id, name);
+        if (existingCustomer.isPresent()) {
+            throw new ConflictException(Strings.format("customer already exists, name = {}", name), "CUSTOMER-CONFLICT-NAME");
         }
     }
 }
