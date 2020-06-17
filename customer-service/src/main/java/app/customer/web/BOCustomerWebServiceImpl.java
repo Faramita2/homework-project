@@ -8,6 +8,7 @@ import app.customer.api.customer.BOUpdateCustomerRequest;
 import app.customer.api.customer.GetCustomerResponse;
 import app.customer.service.BOCustomerService;
 import core.framework.inject.Inject;
+import core.framework.log.ActionLogContext;
 
 /**
  * @author zoo
@@ -28,11 +29,13 @@ public class BOCustomerWebServiceImpl implements BOCustomerWebService {
 
     @Override
     public void update(Long id, BOUpdateCustomerRequest request) {
+        ActionLogContext.put("customer.id", id);
         service.update(id, request);
     }
 
     @Override
     public void delete(Long id) {
+        ActionLogContext.put("customer.id", id);
         service.delete(id);
     }
 

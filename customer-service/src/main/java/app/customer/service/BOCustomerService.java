@@ -59,6 +59,7 @@ public class BOCustomerService {
 
         checkNameUnique(id, request.name);
 
+        logger.info("====start update customer====");
         customer.name = request.name;
         customer.gender = CustomerGender.valueOf(request.gender.name());
         customer.updatedTime = LocalDateTime.now();
@@ -67,6 +68,7 @@ public class BOCustomerService {
         customerRepository.partialUpdate(customer);
         logger.info("update customer id = {}, name = {}, gender = {}, updatedTime = {}, updatedBy = {}",
             id, customer.name, customer.gender.name(), customer.updatedTime, customer.updatedBy);
+        logger.info("====end update customer====");
     }
 
     public void delete(Long id) {
