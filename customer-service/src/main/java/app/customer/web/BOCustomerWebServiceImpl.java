@@ -29,13 +29,13 @@ public class BOCustomerWebServiceImpl implements BOCustomerWebService {
 
     @Override
     public void update(Long id, BOUpdateCustomerRequest request) {
-        ActionLogContext.put("customer.id", id);
+        ActionLogContext.put("customerId", id);
         service.update(id, request);
     }
 
     @Override
     public void delete(Long id) {
-        ActionLogContext.put("customer.id", id);
+        ActionLogContext.put("customerId", id);
         service.delete(id);
     }
 

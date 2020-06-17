@@ -8,6 +8,7 @@ import app.backoffice.api.customer.SearchCustomerAJAXResponse;
 import app.backoffice.api.customer.UpdateCustomerAJAXRequest;
 import app.backoffice.customer.service.CustomerService;
 import core.framework.inject.Inject;
+import core.framework.log.ActionLogContext;
 
 /**
  * @author meow
@@ -28,11 +29,13 @@ public class CustomerAJAXWebServiceImpl implements CustomerAJAXWebService {
 
     @Override
     public void update(Long id, UpdateCustomerAJAXRequest request) {
+        ActionLogContext.put("customerId", id);
         customerService.update(id, request);
     }
 
     @Override
     public void delete(Long id) {
+        ActionLogContext.put("customerId", id);
         customerService.delete(id);
     }
 
