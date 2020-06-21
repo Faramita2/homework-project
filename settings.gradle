@@ -12,4 +12,6 @@ include 'demo-service',
         'back-office-interface',
         'producer-service',
         'producer-service-interface',
-        'consumer-service'
+        'consumer-service',
+        'db-practice-db-migration',
+        'db-practice-mongo-migration'
