@@ -25,25 +25,25 @@ public class DogModule extends Module {
 
         logger.warn("====================create action====================");
         DogView dog = dogService.create();
-        logger.warn("dog name: " + dog.name);
-        logger.warn("dog gender: " + dog.gender);
+        logger.warn("dog name: {}", dog.name);
+        logger.warn("dog gender: {}", dog.gender);
 
         logger.warn("====================query action====================");
         ObjectId dogId = dog.id;
         DogView getDog = dogService.get(dogId);
-        logger.warn("get dog name: " + getDog.name);
-        logger.warn("get dog gender: " + getDog.gender);
+        logger.warn("get dog name: {}", getDog.name);
+        logger.warn("get dog gender: {}", getDog.gender);
 
         logger.warn("====================update action====================");
         dogService.update(dogId);
         DogView newDog = dogService.get(dogId);
-        logger.warn("new dog name: " + newDog.name);
-        logger.warn("new dog gender: " + newDog.gender);
+        logger.warn("new dog name: {}", newDog.name);
+        logger.warn("new dog gender: {}", newDog.gender);
 
         logger.warn("====================replace action====================");
         dogService.replace(dogId);
         DogView newDog2 = dogService.get(dogId);
-        logger.warn("new dog2 name: " + newDog2.name);
-        logger.warn("new dog2 gender: " + newDog2.gender);
+        logger.warn("new dog2 name: {}", newDog2.name);
+        logger.warn("new dog2 gender: {}", newDog2.gender);
     }
 }
