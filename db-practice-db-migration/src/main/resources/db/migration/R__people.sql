@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `people` (
 		`age` INT NOT NULL,
 		`gender` VARCHAR ( 50 ) NOT NULL,
         `referer_id` INT NOT NULL DEFAULT 0,
+        `avatar` VARCHAR(255) NOT NULL DEFAULT '',
 		`created_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		`updated_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		`created_by` VARCHAR ( 50 ) NOT NULL,
@@ -36,7 +37,6 @@ $$
 CREATE PROCEDURE addColumnIfNotExisting (
     IN schema_name VARCHAR(100)
     ,IN table_name VARCHAR(100)
-    , IN modify_way VARCHAR(100)
     , IN column_name VARCHAR(100)
     , IN column_definition VARCHAR(100)
 )
@@ -47,7 +47,7 @@ BEGIN
     IF (@isFieldThere = 0) THEN
 
         SET @ddl = CONCAT('ALTER TABLE ', CONCAT(CONCAT(schema_name, '.'), table_name));
-        SET @ddl = CONCAT(@ddl, ' ', modify_way) ;
+        SET @ddl = CONCAT(@ddl, ' ', 'ADD COLUMN') ;
         SET @ddl = CONCAT(@ddl, ' ', column_name);
         SET @ddl = CONCAT(@ddl, ' ', column_definition);
 
@@ -62,5 +62,8 @@ $$
 
 DELIMITER ;
 
--- add column `referer_id` to table `people`
-CALL addColumnIfNotExisting('demo', 'people', 'add column', 'referer_id', 'INT NOT NULL DEFAULT 0');
+-- add column `referer_id` for table `people`
+CALL addColumnIfNotExisting('demo', 'people', 'referer_id', 'INT NOT NULL DEFAULT 0');
+
+-- add column `avatar` for table `people`
+CALL addColumnIfNotExisting('demo', 'people', 'avatar', "VARCHAR(255) NOT NULL DEFAULT ''");
